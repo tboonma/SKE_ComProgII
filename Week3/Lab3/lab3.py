@@ -17,7 +17,12 @@ def lambda_curry2(func):
     >>> lambda_curry2(mod)(123)(10)
     3
     """
-    pass
+    def first_input(x):
+        def second_input(y):
+            return func(x, y)
+        return second_input
+    return first_input
+    
 
 # Write a function that takes in a function cond and a number n and prints numbers from 1 to n where calling cond on that number returns True.
 
@@ -33,7 +38,13 @@ def keep_ints(cond, n):
     8
     10
     """
-    pass
+    def print_ints(x):
+        if cond(x):
+            print(x)
+        if x == n:
+            return 0
+        return print_ints(x+1)
+    print_ints(1)
 
 # Write a function similar to keep_ints like before, but now it takes in a number n and returns a function that has one parameter cond. The returned function prints out numbers from 1 to n where calling cond on that number returns True.
 
@@ -52,7 +63,15 @@ def make_keeper(n):
     12
     14
     """
-    pass
+    def action(cond):
+        def print_ints(x):
+            if cond(x):
+                print(x)
+            if x == n:
+                return 0
+            return print_ints(x+1)
+        print_ints(1)
+    return action
 
 
 # Consider the following implementations of count_factors and count_primes:
@@ -118,4 +137,15 @@ def count_cond(condition):
     >>> count_primes(20)   # 2, 3, 5, 7, 11, 13, 17, 19
     8
     """
-    pass
+    def get_value(x):
+        i, count = 1, 0
+        while i <= x:
+            if condition(x, i):
+                count += 1
+            i += 1
+        return count
+    return get_value
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
