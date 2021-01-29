@@ -149,7 +149,7 @@ class TutorCard(Card):
         True
         """
         for _ in range(3):
-            opponent.play(0)
+            opponent.hand.pop(0)
         for _ in range(3):
             opponent.draw()
 
@@ -210,8 +210,20 @@ class ProfessorCard(Card):
         0
         """
         orig_opponent_deck_length = len(opponent.deck.cards)
-
-        player.deck.cards
+        i = 0
+        n = len(opponent.deck.cards)
+        for i in range(len(player.deck.cards)):
+            player.deck.cards[i].attack += opponent_card.attack
+            player.deck.cards[i].defense += opponent_card.defense
+        while i < n:
+            if opponent.deck.cards[i].attack == opponent_card.attack and opponent.deck.cards[i].defense == opponent_card.defense:
+                opponent.deck.cards.pop(i)
+                i = 0
+                n = len(opponent.deck.cards)
+            else:
+                i += 1
+            
+        
 
         discarded = orig_opponent_deck_length - len(opponent.deck.cards)
         if discarded:
