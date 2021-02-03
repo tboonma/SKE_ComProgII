@@ -1,5 +1,5 @@
 import turtle
-turtle.speed(0)
+turtle.speed(1)     # TO make the turtle be a TURTLE.
 
 def draw_triangle(size, n=3):
     if n == 0:
@@ -8,7 +8,7 @@ def draw_triangle(size, n=3):
     turtle.left(120)
     draw_triangle(size, n-1)
 
-def sierpinski(n, size=200):
+def sierpinski(n, size=300):
     if n==0:
         draw_triangle(size)
     else:
@@ -24,6 +24,8 @@ def sierpinski(n, size=200):
         turtle.right(120)
         turtle.forward(size/2)
         turtle.left(120)
-
+turtle.penup()
+turtle.goto(-150, -100)
+turtle.pendown()
 sierpinski(5)
 turtle.done()
