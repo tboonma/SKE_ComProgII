@@ -17,10 +17,7 @@ def lambda_curry2(func):
     >>> lambda_curry2(mod)(123)(10)
     3
     """
-    def first_input(x):
-        def second_input(y):
-            return func(x, y)
-        return second_input
+    first_input = lambda x: lambda y: func(x, y)
     return first_input
     
 
