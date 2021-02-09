@@ -2,22 +2,33 @@ import turtle
 import random
 
 """ Trying to draw earth.
+    Submit many times because of THIS!!!!!
+    I tried many art but I think this is so cute.
 """
 turtle.bgcolor('black')
-turtle.speed(1)     # To make the turtle be a turtle
+turtle.speed(0)     # To make the turtle be a turtle
 
-def draw_land(n=5):
+def draw_land(land_type, n=5):
     def left(angle):
         turtle.left(angle)
     def right(angle):
         turtle.right(angle)
-    turtle.pensize(50)
+    turtle.pensize(55)
     if n == 0:
         return
     turn = random.choice([left, right])
+    if land_type == 'green':
+        if turtle.pos()[1] >= 150 and turtle.heading() >= 90:
+            turn = left
+        elif turtle.pos()[1] >= 150 and turtle.heading() <= 90:
+            turn = right
+        elif turtle.pos()[1] <= -150 and turtle.heading() >= 270:
+            turn = left
+        elif turtle.pos()[1] <= -150 and turtle.heading() <= 270:
+            turn = right
     turn(40)
     turtle.forward(30)
-    draw_land(n-1)
+    draw_land(land_type, n-1)
     turtle.backward(30)
     if turn == left:
         right(40)
@@ -47,22 +58,37 @@ def erase_outside_right(distance_list):
 def draw_all_land(n):
     if n == 0:
         return
-    move_turtle(random.randint(-250, 250), random.randint(-330, 330))
+    x = random.randint(-250, 250)
+    y = random.randint(-330, 330)
+    if y <= 280 and y >= 210:
+        if abs(y-280) > abs(y-210):
+            y = 280
+        else:
+            y = 210
+    elif y >= -280 and y <= -210:
+        if abs(y-280) > abs(y-210):
+            y = 280
+        else:
+            y = 210
+    move_turtle(x, y)
     if turtle.pos()[1] >= 230:
         turtle.pencolor('white')
         turtle.setheading(90)
+        land_type = 'white'
     elif turtle.pos()[1] <= -230:
         turtle.pencolor('white')
         turtle.setheading(-90)
+        land_type = 'white'
     else:
         turtle.pencolor('green')
-        if turtle.pos()[1] <= -150:
-            turtle.setheading(random.randint(60, 150))
-        elif turtle.pos()[1] >= 150:
-            turtle.setheading(random.randint(-150, -60))
+        land_type = 'green'
+        if turtle.pos()[1] <= -100:
+            turtle.setheading(random.randint(70, 110))
+        elif turtle.pos()[1] >= 100:
+            turtle.setheading(random.randint(-110, -70))
         else:
             turtle.setheading(random.randint(0, 360))
-    draw_land()
+    draw_land(land_type)
     draw_all_land(n-1)
 
 move_turtle(0, -340)
