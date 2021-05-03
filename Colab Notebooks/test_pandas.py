@@ -13,4 +13,3 @@ import numpy as np
 titanic = pd.read_csv('titanic.csv')
 data = titanic[['Fare', 'Age', 'Sex']].copy()
 # data.loc[data['Sex']=='male', 'Sex'] = 'Green'
-data.
