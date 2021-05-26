@@ -1,6 +1,6 @@
 # SKE_ComProgII
 **My finished code for Computer Programming 2 in Kasetsart University.**
-<br />
+<p>
 DM me if you need help.
   
 - [Facebook](https://www.facebook.com/tboonmaeiei/)
